@@ -56,7 +56,8 @@ less_than:
 
 end_proc:
    # Armazena o resultado em x
-sw t0, 0(x)         # armazena o valor de t0 no endereço de memória apontado por x
+    la t2, x               # carrega o endereço de x em t2
+    sw t0, 0(t2)           # armazena o valor de t0 no endereço de memória apontado por t2
 
     # Imprime a mensagem do resultado
     la a0, result_msg      # carrega o endereço da mensagem em a0
@@ -64,7 +65,7 @@ sw t0, 0(x)         # armazena o valor de t0 no endereço de memória apontado por
     ecall
 
     # Carrega o resultado em a0 e imprime
-    lw a0, 0(t0)            # carrega o resultado de x em a0
+    lw a0, 0(t2)           # carrega o resultado de x em a0
     li a7, 1               # syscall para imprimir inteiro
     ecall
 
